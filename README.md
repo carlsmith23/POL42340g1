@@ -2,7 +2,7 @@
 UCD Programming for Social Scientists: Group 1 Spring 2023
 
 ## Directions:
-1. Log in to replit.com
+* Log in to replit.com
    1. Create a new repl
    2. In your new Repl, open the tools menu and select the Git tool
    3. In the Git panel on the right, click on "Existing Git repo?"
@@ -13,7 +13,7 @@ UCD Programming for Social Scientists: Group 1 Spring 2023
 
     Make sure you have your branch selected then press "Commit All & Push". This saves all your changes to anything in the entire Repl and uploads them to the group Github.
    8. You can commit as often or as little as you like, but each commit creates a version of your file that you will be able to revert back to if you need to so its a good idea to commit before you make any big changes.
-2. If you want to see your branch or anybody else's, go to https://github.com/carlsmith23/POL42340g1/ and you will see the main repository.
+* If you want to see your branch or anybody else's, go to https://github.com/carlsmith23/POL42340g1/ and you will see the main repository.
    1. Above the list of files, you should see a box with a little branching tree and the word "main", click on that to select your branch or anyone else's. 
    
     Github is very cool because it lets us compare all the branches everyone else is working on and choose only the changes we like to merge back into our own branch. This also lets us choose the very best work and then merge that back into the main branch. This will be very useful once we start the group project.

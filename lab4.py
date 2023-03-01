@@ -77,6 +77,7 @@ matplotlib.pyplot.show()
 
 
 import random
+from colorama import Fore, Style
 
 # Create a square grid of arbitrary size filled with random 1s and 0s, store it in a list, and display it as a grid. Take an x coordinate and a y coordinate and return the position in the list where the grid cell at those coordinates is stored.
 
@@ -84,8 +85,9 @@ n = 5  # desired dimension for sides of a square grid of numbers
 l = [] # stores our grid of numbers as a list of length n * n
 x = 0  # x coordinate of desired cell
 y = 0  # y coordinate of desired cell
-i = 0  # index number in our list which contains the value in the cell at coordinates x, y
+i = -1  # index number in our list which contains the value in the cell at coordinates x, y
 b = "" # input buffer
+grid_max = 9  # maximum size of grid
 r = 1  # Bool variable for main loop. While this is true, program will continue to run
 
 #Function to create the grid (takes the desired dimension of our grid)
@@ -107,11 +109,88 @@ def print_grid(n, l):
             print(l[(col+x)], end=" ")    
         x = x + n
         print("")
+
+def print_grid_highlight(n, l, i):
+    col = 0
+    row = 0
+    x = 0
+    for row in range(n):
+        for col in range(n):
+            if (col+x) == i:
+                print(Fore.RED + "{}" .format(l[(col+x)]) + Style.RESET_ALL, end=" ")
+            else:
+                print(l[(col+x)], end=" ")    
+        x = x + n
+        print("")
+
+#Function to display the grid (takes grid dimension and the list holding our grid)
+def print_grid_fancy(n, l, i):
+    col = 0
+    row = 0
+    x = 0
+    print(" X", end=" ")
+    for col_heading in range(n):
+        print(Fore.LIGHTBLUE_EX + "{}" .format(str(col_heading + 1)) + Style.RESET_ALL, end=" ")
+    print("")    
+    print("Y")        
+    for row in range(n):
+        print(Fore.LIGHTBLUE_EX + "{}" .format(str(row + 1)) + Style.RESET_ALL, end="  ")
+        for col in range(n):
+            if (col+x) == i:
+                print(Fore.RED + "{}" .format(l[(col+x)]) + Style.RESET_ALL, end=" ")
+            else:
+                print(l[(col+x)], end=" ")
+        x = x + n    
+        print("")
+
+def print_grid_extra_fancy(n, l):
+    col = 0
+    row = 0
+    x = 0
+    col_heading = 0
+
+    print("    X", end="")
+    for col_heading in range(n):
+        print(col_heading + 1, end="")
+        if col_heading < 9:
+            print(" ", end="")
+        if n > 10:
+                print(" ", end="")
+    print("")
+    if n > 10:
+        print("")
+    print("Y")        
+    for row in range(n):
+        print(row + 1, end="   ")
+        if row < 9:
+            print(" ", end="")
+        for col in range(n):
+            print(l[(col+x)], end=" ")
+            if n > 10:
+                print(" ", end="")    
+        x = x + n
+        print("")
+        if n > 10:
+            print("")
         
 #Function to get list index number from grid x and y coordinates (takes the desired x and y coordinates as well as the dimension of our grid and the list holding it)
 def get_list_index(x, y, n, l):
     i = (x-1) * n + (y-1)
     return(i)
+
+def get_list_index_fixed(x, y, n, l):
+    i = (y-1) * n + (x-1)
+    return(i)
+
+
+
+def validate_value(grid_max, n):
+    if n in range(1, (grid_max+1)):
+        return True
+    else:
+        print("Error: Must be a number between 1 and {}" .format(grid_max))
+        print("")
+        return False
 
 
 # MAIN PROGRAM LOOP
@@ -126,17 +205,20 @@ while r:
     if b.isnumeric():
         b = int(b)
         if b == 1:
-            n = input("How big do you want your grid? ")
+            n = input("How big do you want your grid? (1-{}) " .format(grid_max))
             n = int(n)
-            l = make_grid_list(n)
-            print("Here is your grid:")
-            print_grid(n, l)
-            print("")
-            print("and here is your grid displayed as a list:")
-            print(l)
-            print("")
-            print("")
-
+            if not validate_value(grid_max, n):
+                pass
+            else:    
+                l = make_grid_list(n)
+                print("Here is your grid:")
+                print_grid_fancy(n, l, i)
+                print("")
+                print("and here is your grid displayed as a list:")
+                print(l)
+                print("")
+                print("")
+                
         elif b == 2:
             if len(l) == 0:
                 print("Error: you must first create a grid")
@@ -145,28 +227,31 @@ while r:
             else: 
                 x = input("X coordinate?: ")
                 x = int(x)
-                y = input("Y coordinate?: ")
-                y = int(y)
-                i = get_list_index(x, y, n, l)
-                print("") 
-                print(l[i])
-                print("") 
-                print("") 
-        elif b == 2:
-            if len(l) == 0:
-                print("Error: you must first create a grid")
-                print("")
-                print("") 
-            else: 
-                x = input("X coordinate?: ")
-                x = int(x)
-                y = input("Y coordinate?: ")
-                y = int(y)
-                i = get_list_index(x, y, n, l)
-                print("") 
-                print("The cell located at coordinates {}, {} is stored in the list at index number {} and contains the number {}." .format(x, y, i, l[i]))
-                print("") 
-                print("") 
+                if not validate_value(grid_max, x):
+                    pass
+                else:
+                    y = input("Y coordinate?: ")
+                    y = int(y)
+                    if not validate_value(grid_max, y):
+                        pass
+                    else:
+                        i = get_list_index(x, y, n, l)
+                        print("") 
+                        print("The cell located at coordinates {}, {} is stored in the list at index number {} and contains the number {}." .format(x, y, i, l[i]))
+                        print("")
+                        print_grid_fancy(n, l, i) 
+                        print("")
+                        print("")
+                        print("and here is your grid displayed as a list:")
+                        print("")
+                        print("[", end = "")
+                        for z in range(0, i):
+                            print(l[z], end = ", ")
+                        print(Fore.RED + "{}" .format(l[i]) + Style.RESET_ALL, end=", ")
+                        for z in range(i, (n*n)):    
+                            print(l[z], end = ", ")
+                        print("]")
+                        print("")    
         elif b == 3:
             r = 0
 
@@ -190,7 +275,7 @@ while r:
 
 
 
-#def oneszeroes(L, x, y):
+
 
 
 

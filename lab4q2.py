@@ -7,7 +7,7 @@ x = 0   # x coordinate of desired cell
 y = 0   # y coordinate of desired cell
 index = -10 # index number in our list which contains the value in the cell at coordinates x, y
 shouldchange = False # If True, 2b will modify value, if False, it will not
-buffer = "" # input buffer
+b = "" # input buffer
 grid_max = 9  # maximum size of grid
 list_a = {"x":[],"y":[]};
 run = 1  # Bool variable for main loop. While this is true, program will continue to run
@@ -74,13 +74,17 @@ def get_list_value(x, y, gridsize, list):
 def get_list_index_modify(x, y, gridsize, list, shouldchange):
     i = (x-1) * gridsize + (y-1)
     if shouldchange:
-        list[i] = not list[i]
+        if list[i]:
+            list[i] = 0
+        else:
+            list[i] = 1
     return(i)
 
 #3a. Write a function that takes a list and returns random x and y coordinates. The x and y coordinates have to be valid, given the length of the list.
 #3b. Write a modification of 3a, returning only coordinates for a cell that has a zero value.
 
 def rand_zero(gridsize, list):
+    list_value = 1000
     while list_value > 0:
         x = random.randint(1, grid_max)
         y = random.randint(1, grid_max)
@@ -91,9 +95,10 @@ def rand_zero(gridsize, list):
 
 def change_zero(x, y, gridsize, list, shouldchange, list_a):
     xy = rand_zero(gridsize, list)
-    get_list_value_modify(xy[0], xy[1], gridsize, list, True)
+    get_list_value_modify(xy[0], xy[1], gridsize, list, True) #Works up to here
     list_a["x"].append(xy[0])
     list_a["y"].append(xy[1])
+    return list_a
 
 
 
@@ -104,7 +109,10 @@ while run:
     print("What would you like to do?")
     print("1: Create a new grid")
     print("2: Get the value of cell at an x, y coordinate")
-    print("3: Quit")
+    print("3: Change a random 0 in the grid")
+    print("4: Change a particular value in the grid")
+    print("5: Show list of changes")
+    print("6: Quit")
     print("")
     b = input("?: ")
 
@@ -137,9 +145,55 @@ while run:
                 print("The cell located at coordinates {}, {} is stored in the list at index number {} and contains the number {}." .format(x, y, index, list[index]))
                 print("") 
                 print_grid_fancy(gridsize, list, index)
-                print("") 
+                print("")
+
         elif b == 3:
+            if len(list) == 0:
+                print("Error: you must first create a grid")
+                print("")
+                print("") 
+            else:   
+                xy = rand_zero(gridsize, list)
+                x = xy[0]
+                y = xy[1]
+                shouldchange = True
+                index = get_list_index_modify(x, y, gridsize, list, shouldchange)
+                print("") 
+                print("The cell located at coordinates {}, {} has been changed. It is stored in the list at index number {} and now contains the number {}." .format(x, y, index, list[index]))
+                print("") 
+                print_grid_fancy(gridsize, list, index)
+                print("")
+
+        elif b == 4:
+            if len(list) == 0:
+                print("Error: you must first create a grid")
+                print("")
+                print("") 
+            else:   
+                shouldchange = True
+                x = input("X coordinate?: ")
+                x = int(x)
+                y = input("Y coordinate?: ")
+                y = int(y)
+                index = get_list_index_modify(x, y, gridsize, list, shouldchange)
+                print("") 
+                print("The cell located at coordinates {}, {} has been changed. It is stored in the list at index number {} and now contains the number {}." .format(x, y, index, list[index]))
+                print("") 
+                print_grid_fancy(gridsize, list, index)
+                print("")
+
+        elif b == 5:
+            if len(list) == 0:
+                print("Error: you must first create a grid")
+                print("")
+                print("") 
+            else: 
+                print(list_a)
+
+        elif b == 6:
             run = 0
+        
+
 
     else: 
         print("Error! Choose a number")

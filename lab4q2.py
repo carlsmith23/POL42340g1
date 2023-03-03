@@ -96,9 +96,7 @@ def rand_zero(gridsize, list):
 def change_zero(x, y, gridsize, list, shouldchange, list_a):
     xy = rand_zero(gridsize, list)
     get_list_value_modify(xy[0], xy[1], gridsize, list, True) #Works up to here
-    list_a["x"].append(xy[0])
-    list_a["y"].append(xy[1])
-    return list_a
+    list_a.append(dict(x = xy[0], y = xy[1]))
 
 
 

@@ -1,13 +1,15 @@
 import random
+from colorama import Fore, Style
 
 gridsize = 5   # desired dimension for sides of a square grid of numbers
 list = []   # stores our grid of numbers as a list of length n * n
 x = 0   # x coordinate of desired cell
 y = 0   # y coordinate of desired cell
-index = -1  # index number in our list which contains the value in the cell at coordinates x, y
+index = -10 # index number in our list which contains the value in the cell at coordinates x, y
 shouldchange = False # If True, 2b will modify value, if False, it will not
 buffer = "" # input buffer
 grid_max = 9  # maximum size of grid
+list_a = {"x":[],"y":[]};
 run = 1  # Bool variable for main loop. While this is true, program will continue to run
 
 
@@ -32,7 +34,24 @@ def print_grid(gridsize, list):
         x = x + gridsize
         print("")
 
-
+def print_grid_fancy(gridsize, list, index):
+    col = 0
+    row = 0
+    x = 0
+    print(" X", end=" ")
+    for col_heading in range(gridsize):
+        print(Fore.LIGHTBLUE_EX + "{}" .format(str(col_heading + 1)) + Style.RESET_ALL, end=" ")
+    print("")    
+    print("Y")        
+    for row in range(gridsize):
+        print(Fore.LIGHTBLUE_EX + "{}" .format(str(row + 1)) + Style.RESET_ALL, end="  ")
+        for col in range(gridsize):
+            if (col+x) == index:
+                print(Fore.RED + "{}" .format(list[(col+x)]) + Style.RESET_ALL, end=" ")
+            else:
+                print(list[(col+x)], end=" ")
+        x = x + gridsize    
+        print("")
 
 #2b. Write a function that takes as parameters an x and y value, and a list length N, and returns a list index as follows: i = (x-1) * N + (y-1).
 
@@ -61,7 +80,7 @@ def get_list_index_modify(x, y, gridsize, list, shouldchange):
 #3a. Write a function that takes a list and returns random x and y coordinates. The x and y coordinates have to be valid, given the length of the list.
 #3b. Write a modification of 3a, returning only coordinates for a cell that has a zero value.
 
-def rand_zero(gridsize, l):
+def rand_zero(gridsize, list):
     while list_value > 0:
         x = random.randint(1, grid_max)
         y = random.randint(1, grid_max)
@@ -70,9 +89,17 @@ def rand_zero(gridsize, l):
 
 #4. Using all of the above, write a function that takes a list A, a list L, then finds a random position that is 0 in L, sets it to 1, and adds the (x,y) coordinates to A. A should be a list of dictionaries, where every item has a value "x" and a value "y".
 
-def change_zero(gridsize, list_a, list):
-    rz = rand_zero(gridsize)
+def change_zero(x, y, gridsize, list, shouldchange, list_a):
+    xy = rand_zero(gridsize, list)
+    get_list_value_modify(xy[0], xy[1], gridsize, list, True)
+    list_a["x"].append(xy[0])
+    list_a["y"].append(xy[1])
 
+
+
+
+
+#Main Program 
 while run:
     print("What would you like to do?")
     print("1: Create a new grid")
@@ -84,19 +111,19 @@ while run:
     if b.isnumeric():
         b = int(b)
         if b == 1:
-            n = input("How big do you want your grid? ")
-            n = int(n)
-            l = make_grid_list(n)
+            gridsize = input("How big do you want your grid? ")
+            gridsize = int(gridsize)
+            list = make_grid_list(gridsize)
             print("Here is your grid:")
-            print_grid(n, l)
+            print_grid_fancy(gridsize, list, index)
             print("")
             print("and here is your grid displayed as a list:")
-            print(l)
+            print(list)
             print("")
             print("")
 
         elif b == 2:
-            if len(l) == 0:
+            if len(list) == 0:
                 print("Error: you must first create a grid")
                 print("")
                 print("") 
@@ -105,25 +132,11 @@ while run:
                 x = int(x)
                 y = input("Y coordinate?: ")
                 y = int(y)
-                i = get_list_index(x, y, n, l)
+                index = get_list_index_modify(x, y, gridsize, list, shouldchange)
                 print("") 
-                print(l[i])
+                print("The cell located at coordinates {}, {} is stored in the list at index number {} and contains the number {}." .format(x, y, index, list[index]))
                 print("") 
-                print("") 
-        elif b == 2:
-            if len(l) == 0:
-                print("Error: you must first create a grid")
-                print("")
-                print("") 
-            else: 
-                x = input("X coordinate?: ")
-                x = int(x)
-                y = input("Y coordinate?: ")
-                y = int(y)
-                i = get_list_index(x, y, n, l)
-                print("") 
-                print("The cell located at coordinates {}, {} is stored in the list at index number {} and contains the number {}." .format(x, y, i, l[i]))
-                print("") 
+                print_grid_fancy(gridsize, list, index)
                 print("") 
         elif b == 3:
             run = 0

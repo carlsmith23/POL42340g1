@@ -15,6 +15,7 @@ run = 1  # Bool variable for main loop. While this is true, program will continu
 def make_grid_list(gridsize): 
     list = []
     list_length = 0
+    gridsize = int(gridsize)
     for list_length in range(gridsize * gridsize):
         value = random.randint(0,1)
         list.append(value)
@@ -49,16 +50,6 @@ def get_list_value(x, y, gridsize, list):
 
 #2c. Modify the function in 2b to print an error message on the screen when x or y is not within the range 1 to n.
 
-def valid_value(grid_max, gridsize):
-    valid_size = isnumeric(gridsize)
-    if valid_size and (gridsize in range(1, (grid_max+1))):
-        gridsize = int(gridsize)
-        return True
-    else:
-        print("Error: Must be a number between 1 and {}" .format(grid_max))
-        print("")
-        return False
-
 #2d. Modify the function in 2d to take an additional boolean parameter, which if set, changes the value at the point in the list at (x,y). The default value of the parameter should be False, so that if you do not use it, it will by default not change the data.
 
 def get_list_index_modify(x, y, gridsize, list, shouldchange):
@@ -70,7 +61,7 @@ def get_list_index_modify(x, y, gridsize, list, shouldchange):
 #3a. Write a function that takes a list and returns random x and y coordinates. The x and y coordinates have to be valid, given the length of the list.
 #3b. Write a modification of 3a, returning only coordinates for a cell that has a zero value.
 
-def rand_zero(gridsize, l)
+def rand_zero(gridsize, l):
     while list_value > 0:
         x = random.randint(1, grid_max)
         y = random.randint(1, grid_max)
@@ -82,12 +73,78 @@ def rand_zero(gridsize, l)
 def change_zero(gridsize, list_a, list):
     rz = rand_zero(gridsize)
 
+while run:
+    print("What would you like to do?")
+    print("1: Create a new grid")
+    print("2: Get the value of cell at an x, y coordinate")
+    print("3: Quit")
+    print("")
+    b = input("?: ")
+
+    if b.isnumeric():
+        b = int(b)
+        if b == 1:
+            n = input("How big do you want your grid? ")
+            n = int(n)
+            l = make_grid_list(n)
+            print("Here is your grid:")
+            print_grid(n, l)
+            print("")
+            print("and here is your grid displayed as a list:")
+            print(l)
+            print("")
+            print("")
+
+        elif b == 2:
+            if len(l) == 0:
+                print("Error: you must first create a grid")
+                print("")
+                print("") 
+            else: 
+                x = input("X coordinate?: ")
+                x = int(x)
+                y = input("Y coordinate?: ")
+                y = int(y)
+                i = get_list_index(x, y, n, l)
+                print("") 
+                print(l[i])
+                print("") 
+                print("") 
+        elif b == 2:
+            if len(l) == 0:
+                print("Error: you must first create a grid")
+                print("")
+                print("") 
+            else: 
+                x = input("X coordinate?: ")
+                x = int(x)
+                y = input("Y coordinate?: ")
+                y = int(y)
+                i = get_list_index(x, y, n, l)
+                print("") 
+                print("The cell located at coordinates {}, {} is stored in the list at index number {} and contains the number {}." .format(x, y, i, l[i]))
+                print("") 
+                print("") 
+        elif b == 3:
+            run = 0
+
+    else: 
+        print("Error! Choose a number")
+        print("")
+        print("")
+        print("")
 
 
 
 
 
 
+
+
+
+
+
+"""
 # MAIN PROGRAM LOOP
 while run:
     print("What would you like to do?")
@@ -102,6 +159,7 @@ while run:
         if buffer == 1:
             gridsize = input("How big do you want your grid? (1-{}) " .format(grid_max))
             if not valid_value(grid_max, gridsize):
+                gridsize = int(gridsize)
                 pass
             else:    
                 list = make_grid_list(gridsize)
@@ -166,7 +224,7 @@ while run:
         print("")
         print("")
 
-
+"""
 
 
 

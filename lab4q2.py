@@ -9,7 +9,7 @@ index = -10 # index number in our list which contains the value in the cell at c
 shouldchange = False # If True, 2b will modify value, if False, it will not
 b = "" # input buffer
 grid_max = 9  # maximum size of grid
-list_a = {"x":[],"y":[]};
+list_a = [] #holds a list of dictionaries
 run = 1  # Bool variable for main loop. While this is true, program will continue to run
 
 
@@ -93,10 +93,7 @@ def rand_zero(gridsize, list):
 
 #4. Using all of the above, write a function that takes a list A, a list L, then finds a random position that is 0 in L, sets it to 1, and adds the (x,y) coordinates to A. A should be a list of dictionaries, where every item has a value "x" and a value "y".
 
-def change_zero(x, y, gridsize, list, shouldchange, list_a):
-    xy = rand_zero(gridsize, list)
-    get_list_value_modify(xy[0], xy[1], gridsize, list, True) #Works up to here
-    list_a.append(dict(x = xy[0], y = xy[1]))
+    #Added to main program loop option 3 and 4
 
 
 
@@ -156,6 +153,7 @@ while run:
                 y = xy[1]
                 shouldchange = True
                 index = get_list_index_modify(x, y, gridsize, list, shouldchange)
+                list_a.append({"x":xy[0], "y":xy[1]})
                 print("") 
                 print("The cell located at coordinates {}, {} has been changed. It is stored in the list at index number {} and now contains the number {}." .format(x, y, index, list[index]))
                 print("") 
@@ -174,6 +172,7 @@ while run:
                 y = input("Y coordinate?: ")
                 y = int(y)
                 index = get_list_index_modify(x, y, gridsize, list, shouldchange)
+                list_a.append({"x":xy[0], "y":xy[1]})
                 print("") 
                 print("The cell located at coordinates {}, {} has been changed. It is stored in the list at index number {} and now contains the number {}." .format(x, y, index, list[index]))
                 print("") 

@@ -290,6 +290,18 @@ while r:
 #3a. Write a function that takes a list and returns random x and y coordinates. The x and y coordinates have to be valid, given the length of the list.
 #3b. Write a modification of 3a, returning only coordinates for a cell that has a zero value.
 
+import random
 
+def rand(gridmax):
+    x = random.randint(1, grid_max)
+    y = random.randint(1, grid_max)
+        return(x, y)
+
+
+def rand_zero(gridmax, l)
+    while list_value > 0:
+        xy = rand(gridmax)
+        
+        
 
 #4. Using all of the above, write a function that takes a list A, a list L, then finds a random position that is 0 in L, sets it to 1, and adds the (x,y) coordinates to A. A should be a list of dictionaries, where every item has a value "x" and a value "y".

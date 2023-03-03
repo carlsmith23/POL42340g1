@@ -31,6 +31,8 @@ def print_grid(gridsize, list):
         x = x + gridsize
         print("")
 
+
+
 #2b. Write a function that takes as parameters an x and y value, and a list length N, and returns a list index as follows: i = (x-1) * N + (y-1).
 
 def get_list_index(x, y, gridsize, list):
@@ -38,12 +40,12 @@ def get_list_index(x, y, gridsize, list):
     return(i)
 
 
+
 #2b. Write a function that takes a parameter L, which is a list of ones and zeroes, and parameters x and y representing coordinates, which returns the value of that point in the list, using 2b. Note that N is the square root of the length of the list. Test using a list generated in 2a.    
 
 def get_list_value(x, y, gridsize, list):
     i = (x-1) * gridsize + (y-1)
     return(list[i])
-
 
 #2c. Modify the function in 2b to print an error message on the screen when x or y is not within the range 1 to n.
 
@@ -64,6 +66,23 @@ def get_list_index_modify(x, y, gridsize, list, shouldchange):
     if shouldchange:
         list[i] = not list[i]
     return(i)
+
+#3a. Write a function that takes a list and returns random x and y coordinates. The x and y coordinates have to be valid, given the length of the list.
+#3b. Write a modification of 3a, returning only coordinates for a cell that has a zero value.
+
+def rand_zero(gridsize, l)
+    while list_value > 0:
+        x = random.randint(1, grid_max)
+        y = random.randint(1, grid_max)
+        list_value = get_list_value(x, y, gridsize, list)
+    return x, y
+
+#4. Using all of the above, write a function that takes a list A, a list L, then finds a random position that is 0 in L, sets it to 1, and adds the (x,y) coordinates to A. A should be a list of dictionaries, where every item has a value "x" and a value "y".
+
+def change_zero(gridsize, list_a, list):
+    rz = rand_zero(gridsize)
+
+
 
 
 
@@ -146,7 +165,6 @@ while run:
         print("")
         print("")
         print("")
-
 
 
 

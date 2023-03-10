@@ -8,6 +8,7 @@ class prisoner
         self.strategy = strategy[pstrat]
         self.imprisoned = True
         self.sentence = sentence
+        self.chance_to_die = 0
 
 def generate_name():
     first_name = ["Archie", 
@@ -91,6 +92,6 @@ def set_strategy():
         strategy = random.randint(0,3)
         return strategies[stategy]
         
-
+def set_chance_to_die():
 
 

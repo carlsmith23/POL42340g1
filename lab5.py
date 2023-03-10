@@ -119,13 +119,7 @@ def print_map(map_size, map):
         print("")
   
 
-
-
-
-
-
 #########Main Program Loop###########
-
 while run == 1:
     print("Set (s)ize of the map")
     print("Set number of (a)gents")

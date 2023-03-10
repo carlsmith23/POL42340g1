@@ -15,7 +15,5 @@
 from simulation import Simulation
 
 simulation = Simulation()
-run = 1
 
-while run == 1:
-    run = simulation.main_loop()
+simulation.main_loop()

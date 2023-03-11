@@ -8,18 +8,17 @@ class Simulation:
         run = 1
         map = Map()
         while run == 1:
-            print("Set (s)ize of the map")
-            print("Set number of (a)gents")
+            print("Initialize (m)ap")
             print("(P)rint map")
             print("(Q)uit")
             print("")
             b = input("Select an option: ")
             print("")
             if b.isalpha and len(b) == 1:
-                if b == "s" or b == "S":
+                if b == "m" or b == "M":
                     map.generate()
-                elif b == "a" or b == "A":
                     map.place_agents()
+                    map.display()
                 elif b == "p" or b == "P":
                     map.display()
                 elif b == "q" or b == "Q":

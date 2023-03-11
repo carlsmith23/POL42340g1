@@ -57,10 +57,7 @@ class Map:
                                     success = 1
                         print("")
                         print("{} agents placed on the map" .format(self.agents))
-                        print("")
-                        self.display()
-                        print("")
-                        print("")                     
+                        print("")                   
                         valid_input = 1
                     else:
                         print("Error: The map isn't big enough to hold that many agents!")    

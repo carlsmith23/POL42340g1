@@ -5,3 +5,6 @@ class Config:
     def get_max(self):
         return self.map_max_size
     
+    def set_max(self, max):
+        self.map_max_size = max
+    

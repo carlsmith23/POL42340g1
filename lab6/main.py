@@ -12,8 +12,7 @@
 #Especially 1e is not very specific and will require some thinking. Brainstorm in your group what the necessary class variables and class methods might be to make this all work.
 
 
-from simulation import Simulation
+from menu import Menu
 
-simulation = Simulation()
-
-simulation.main_loop()
+menu = Menu()
+menu.main_loop()

@@ -1,27 +1,29 @@
+from config import Config
 from map import Map
 
 class Simulation:
     def __init__(self):
-        b = ""
+        self.b = ""
 
     def main_loop(self):
         run = 1
-        map = Map()
+        config = Config()
+        map = Map(config.get_max())
         while run == 1:
             print("Initialize (m)ap")
             print("(P)rint map")
             print("(Q)uit")
             print("")
-            b = input("Select an option: ")
+            self.b = input("Select an option: ")
             print("")
-            if b.isalpha and len(b) == 1:
-                if b == "m" or b == "M":
+            if self.b is not none and self.b.isalpha:
+                if self.b == "m" or self.b == "M":
                     map.generate()
                     map.place_agents()
                     map.display()
-                elif b == "p" or b == "P":
+                elif self.b == "p" or self.b == "P":
                     map.display()
-                elif b == "q" or b == "Q":
+                elif self.b == "q" or self.b == "Q":
                     run = 0
                 else:
                     print("")

@@ -1,9 +1,9 @@
 import random
 
 class Map:
-    def __init__(self):
+    def __init__(self, max_size):
         self.size = "size"
-        self.max_size = 100
+        self.max_size = max_size
         self.agents = "agents"
         self.list = []
 
@@ -14,7 +14,7 @@ class Map:
             self.size = input("How big do you want the map to be? (1-{}): " .format(self.max_size))
             if self.size.isnumeric():
                 self.size = int(self.size)
-                if self.size in range(1, self.max_size):
+                if self.size in range(1, self.max_size + 1):
                     print("")
                     print("Map size set to {}" .format(self.size))
                     print("")
@@ -22,9 +22,8 @@ class Map:
                     for list_length in range((self.size * self.size) + 1):
                         self.list.append(0)
                     print("")
-                    print("Map generated" .format(self.size))
+                    print("Map generated")
                     print("")
-                    print(self.list)
                     valid_input = 1
                 else:
                     print("Error: Choose a number between 1 and 100")
@@ -33,7 +32,6 @@ class Map:
 
 
     def place_agents(self):
-        print(self.list)
         valid_input = 0
         if self.size == 0:
             print("Set map size first")
